@@ -3,10 +3,8 @@ import random
 import numpy as np
 import PIL
 
-
- DSeremetis-patch-1
-WIDTH = 80
-HEIGHT = 80
+WIDTH = 100
+HEIGHT = 100
 
 MARGIN = 1
 
