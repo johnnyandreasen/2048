@@ -25,7 +25,15 @@ TILE_SIZE = 80
 class Game_2048(arcade.Window):
     
     def __init__(self, width, height):
-        
+        self.board = None
+        self.frame_count = 0
+        self.game_over = False
+        self.paused = False
+        self.board_sprite_list = None
+
+        self.stone = None
+        self.stone_x = 0
+        self.stone_y = 0
         
     def spawn_tile(self):
         
