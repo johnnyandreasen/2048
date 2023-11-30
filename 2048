@@ -4,14 +4,18 @@ import numpy as np
 import PIL
 
 
-SCREEN_WIDTH = 400
-SCREEN_HEIGHT = 400
-TILE_SIZE = 80
+WIDTH = 80
+HEIGHT = 80
+
+MARGIN = 1
+
+SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
+SCREEN_TITLE = "2048"
+    
 
 
-def matt(): 
-    rows = 4 
-    columns = 4 
+
 
 
 class Game_2048(arcade.Window):
