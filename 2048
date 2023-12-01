@@ -64,7 +64,10 @@ class Game_2048(arcade.Window):
  
         
     def spawn_tile(self):
-        pass
+        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
+        if empty_cells:
+            i, j = random.choice(empty_cells)
+            board[i][j] = 2 if random.random() < 0.9 else 4
     
     def on_draw(self):
         pass
