@@ -15,7 +15,7 @@ SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
-colors = 
+colors = []
 
 def new_board():
     board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
