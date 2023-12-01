@@ -46,8 +46,7 @@ class Game_2048(arcade.Window):
         self.board_sprite_list = None
 
         self.stone = None
-        self.stone_x = 0
-        self.stone_y = 0
+ 
         
     def spawn_tile(self):
         
