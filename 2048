@@ -4,15 +4,17 @@ import numpy as np
 import PIL
 
 
+ROW_COUNT = 4
+COLUMN_COUNT = 4
 
+# This sets the WIDTH and HEIGHT of each grid location
 WIDTH = 150
 HEIGHT = 150
 
+# This sets the margin between each cell
+# and on the edges of the screen.
 MARGIN = 5
 
-COLUMN_COUNT = 4
-ROW_COUNT = 4
-TILE_SIZE = 80
 
 
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
