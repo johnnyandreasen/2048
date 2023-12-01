@@ -22,7 +22,6 @@ SCREEN_TITLE = "2048"
 
     
 def new_board():
-    """ Create a grid of 0's. Add 1's to the bottom for easier collision detection. """
     board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
     board += [[1 for _x in range(COLUMN_COUNT)]]
     board = np.asarray(board)
