@@ -99,6 +99,12 @@ class MyGame(arcade.Window):
             else:
                 self.grid[row][column] = 0
 
+    def spawn_tile(self):
+        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
+        if empty_cells:
+            i, j = random.choice(empty_cells)
+            self.board[i][j] = 2 if random.random() < 0.9 else 4
+
 
 def main():
 
@@ -113,12 +119,7 @@ if __name__ == "__main__":
 
 CLASS_2048
  
-        
-    def spawn_tile(self):
-        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
-        if empty_cells:
-            i, j = random.choice(empty_cells)
-            self.board[i][j] = 2 if random.random() < 0.9 else 4
+
 
 
 
