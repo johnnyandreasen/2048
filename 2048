@@ -30,20 +30,7 @@ def new_board():
 
 
 
-def merge_tiles(row):
-    new_row = [0] * 4
-    index = 0
-    for tile in row:
-        if tile != 0:
-            if new_row[index] == 0:
-                new_row[index] = tile
-            elif new_row[index] == tile:
-                new_row[index] *= 2
-                index += 1
-            else:
-                index += 1
-                new_row[index] = tile
-    return new_row
+
 
 
 class Game_2048(arcade.Window):
@@ -64,7 +51,25 @@ class Game_2048(arcade.Window):
         if empty_cells:
             i, j = random.choice(empty_cells)
             self.board[i][j] = 2 if random.random() < 0.9 else 4
-    
+
+
+    def merge_tiles(row):
+    new_row = [0] * 4
+    index = 0
+    for tile in row:
+        if tile != 0:
+            if new_row[index] == 0:
+                new_row[index] = tile
+            elif new_row[index] == tile:
+                new_row[index] *= 2
+                index += 1
+            else:
+                index += 1
+                new_row[index] = tile
+    return new_row
+
+
+
     def on_draw(self):
         pass
     
