@@ -35,9 +35,11 @@ class MyGame(arcade.Window):
     """
 
     def __init__(self, width, height, title):
-        """
-        Set up the application.
-        """
+        self.board = None
+        self.frame_count = 0
+        self.game_over = False
+        self.paused = False
+        self.board_sprite_list = None
 
         super().__init__(width, height, title)
 
@@ -110,17 +112,7 @@ if __name__ == "__main__":
 
 
 
-class Game_2048(arcade.Window):
-    
-    def __init__(self, width, height):
-
-        self.board = None
-        self.frame_count = 0
-        self.game_over = False
-        self.paused = False
-        self.board_sprite_list = None
-
-        self.stone = None
+CLASS_2048
  
         
     def spawn_tile(self):
@@ -141,8 +133,6 @@ class Game_2048(arcade.Window):
                     return False
 
 
-    def on_draw(self):
-        pass
     
     def move_right(board):
         reversed_board = [row[::-1] for row in board]
@@ -162,9 +152,7 @@ class Game_2048(arcade.Window):
         new_board = move_right(transposed_board)
         return transpose_board(new_board)
 
-    
-    def move_tiles(self, direction):
-        pass
+
     
     def merge_tiles(self, direction):
          new_row = [0] * 4
@@ -182,9 +170,6 @@ class Game_2048(arcade.Window):
 
         return new_row
 
-    
-    def can_move(self, direction):
-        pass
     
 def main():
     game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT)
