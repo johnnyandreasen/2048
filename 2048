@@ -29,10 +29,6 @@ def new_board():
 
 
 
-
-
-
-
 class Game_2048(arcade.Window):
     
     def __init__(self, width, height):
