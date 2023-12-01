@@ -34,7 +34,6 @@ def new_board():
 class Game_2048(arcade.Window):
     
     def __init__(self, width, height):
-        arcade.open_window(800,800,'2048',False,False)
 
         self.board = None
         self.frame_count = 0
