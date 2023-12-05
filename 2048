@@ -125,19 +125,19 @@ class Game_2048(arcade.Window):
         return new_row
     
 
-def main():
-    game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT, "2048")
-    arcade.run()
+    def main():
+        game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT, "2048")
+        arcade.run()
     
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
 
 
-def new_board():
-    board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
-    board += [[1 for _x in range(COLUMN_COUNT)]]
-    board = np.asarray(board)
-    return board
+    def new_board():
+        board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
+        board += [[1 for _x in range(COLUMN_COUNT)]]
+        board = np.asarray(board)
+        return board
 
 
 class Game_2048(arcade.Window):
