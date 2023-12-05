@@ -109,6 +109,18 @@ class Game_2048(arcade.Window):
             new_row = self.merge_tiles(self.board[row])
             self.board[row] = new_row
 
+    def on_key_press(self, symbol, modifiers):
+        if symbol == arcade.key.RIGHT:
+            self.move_right()
+        elif symbol == arcade.key.UP:
+            self.move_up()
+        elif symbol == arcade.key.LEFT:
+            self.move_left()
+        elif symbol == arcade.key.DOWN:
+            self.move_down()
+        elif symbol == arcade.key.SPACE:
+            self.spawn_tile()
+
     def merge_tiles(self, direction):
         new_row = [0] * 4
         index = 0
