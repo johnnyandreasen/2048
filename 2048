@@ -59,7 +59,7 @@ class Game_2048(arcade.Window):
                 if self.grid[row][column] == 8:
                     color = light_orange
                 if self.grid[row][column] == 16:
-                    color = darker orange 
+                    color = darker_orange 
                 if self.grid[row][column] == 32:
                     color = red
                 if self.grid[row][column] == 64:
