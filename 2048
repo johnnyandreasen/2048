@@ -32,14 +32,13 @@ def new_board():
 class Game_2048(arcade.Window):
     
     def __init__(self, width, height, title):
+        super().__init__(width, height, title)
+
         self.board = None
         self.frame_count = 0
         self.game_over = False
         self.paused = False
         self.board_sprite_list = None
-
-        super().__init__(width, height, title)
-
         
         self.grid = []
         for row in range(ROW_COUNT):
