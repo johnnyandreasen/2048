@@ -22,6 +22,117 @@ yellow = (255, 255, 25, 1)
 
 color = []
 
+import arcade
+import random
+import numpy as np
+import PIL
+
+ROW_COUNT = 4
+COLUMN_COUNT = 4
+
+WIDTH = 150
+HEIGHT = 150
+
+MARGIN = 5
+
+SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
+SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
+SCREEN_TITLE = "2048"
+
+colors = []
+
+def new_board():
+    board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
+    board += [[1 for _x in range(COLUMN_COUNT)]]
+    board = np.asarray(board)
+    return board
+
+
+class Game_2048(arcade.Window):
+    
+    def __init__(self, width, height, title):
+        self.board = None
+        self.frame_count = 0
+        self.game_over = False
+        self.paused = False
+        self.board_sprite_list = None
+
+        super().__init__(width, height, title)
+
+        
+        self.grid = []
+        for row in range(ROW_COUNT):
+            self.grid.append([])
+            for column in range(COLUMN_COUNT):
+                self.grid[row].append(0)
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        self.clear()
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 2:
+                    color = arcade.color.LIGHT_GRAY
+                else:
+                    color = arcade.color.WHITE
+
+                # Do the math to figure out where the box is
+                x = (MARGIN + WIDTH) * column + MARGIN + WIDTH // 2
+                y = (MARGIN + HEIGHT) * row + MARGIN + HEIGHT // 2
+
+                # Draw the box
+                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
+
+    
+    def spawn_tile(self):
+        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
+        if empty_cells:
+            i, j = random.choice(empty_cells)
+            self.board[i][j] = 2 if random.random() < 0.9 else 4
+            
+    def move_right(board):
+        reversed_board = [row[::-1] for row in board]
+        new_board = []
+        for row in reversed_board:
+            new_row = merge_tiles(row)
+            new_board.append(new_row[::-1])
+        return new_board
+
+    def move_up(board):
+        transposed_board = transpose_board(board)
+        new_board = move_left(transposed_board)
+        return transpose_board(new_board)
+
+    def move_down(board):
+        transposed_board = transpose_board(board)
+        new_board = move_right(transposed_board)
+        return transpose_board(new_board)
+    
+    def merge_tiles(self, direction):
+        new_row = [0] * 4
+        index = 0
+        for tile in row:
+            if tile != 0:
+                if new_row[index] == 0:
+                    new_row[index] = tile
+                elif new_row[index] == tile:
+                    new_row[index] *= 2
+                    index += 1
+                else:
+                    index += 1
+                    new_row[index] = tile
+
+        return new_row
+    
+
+def main():
+    game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT, "2048")
+    arcade.run()
+    
+if __name__ == "__main__":
+    main()
+
+
 def new_board():
     board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
     board += [[1 for _x in range(COLUMN_COUNT)]]
