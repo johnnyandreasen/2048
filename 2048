@@ -71,7 +71,7 @@ class MyGame(arcade.Window):
 
     def generate_tiles:
 
-    def on_mouse_press(self, x, y, button, modifiers):
+    def on_key_press(self, x, y, button, modifiers):
         """
         Called when the user presses a mouse button.
         """
