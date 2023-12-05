@@ -1,6 +1,7 @@
 import numpy as np
 import arcade
 import random
+import PIL
 
 # Set how many rows and columns we will have
 ROW_COUNT = 4
