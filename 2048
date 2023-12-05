@@ -20,7 +20,7 @@ red = (230, 26, 26, 0.8)
 darker_red = (230, 26, 26, 1)
 yellow = (255, 255, 25, 1)
 
-colors = []
+color = []
 
 def new_board():
     board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
