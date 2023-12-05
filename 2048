@@ -69,6 +69,8 @@ class MyGame(arcade.Window):
                 # Draw the box
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
 
+    def generate_tiles:
+
     def on_mouse_press(self, x, y, button, modifiers):
         """
         Called when the user presses a mouse button.
