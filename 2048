@@ -1,74 +1,61 @@
 import arcade
-import random
-import numpy as np
-import PIL
 
-ROW_COUNT = 4
-COLUMN_COUNT = 4
-WIDTH = 150
-HEIGHT = 150
-MARGIN = 5
-light_gray = (224, 198, 211, 0.8)
-darker_gray = (163, 149, 156, 0.8)
-light_orange = (250, 170, 76, 0.8)
-darker_orange = (242, 139, 18, 0.8)
-red = (230, 26, 26, 0.8)
-darker_red = (230, 26, 26, 1)
-yellow = (255, 255, 25, 1)
-
-color = []
-
-import arcade
-import random
-import numpy as np
-import PIL
-
+# Set how many rows and columns we will have
 ROW_COUNT = 4
 COLUMN_COUNT = 4
 
+# This sets the WIDTH and HEIGHT of each grid location
 WIDTH = 150
 HEIGHT = 150
 
+# This sets the margin between each cell
+# and on the edges of the screen.
 MARGIN = 5
 
+# Do the math to figure out our screen dimensions
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
-SCREEN_TITLE = "2048"
-
-colors = []
-
-def new_board():
-    board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
-    board += [[1 for _x in range(COLUMN_COUNT)]]
-    board = np.asarray(board)
-    return board
+SCREEN_TITLE = "Array Backed Grid Example"
 
 
-class Game_2048(arcade.Window):
-    
+class MyGame(arcade.Window):
+    """
+    Main application class.
+    """
+
     def __init__(self, width, height, title):
-        self.board = None
-        self.frame_count = 0
-        self.game_over = False
-        self.paused = False
-        self.board_sprite_list = None
+        """
+        Set up the application.
+        """
 
         super().__init__(width, height, title)
 
-        
+        # Create a 2 dimensional array. A two-dimensional
+        # array is simply a list of lists.
         self.grid = []
         for row in range(ROW_COUNT):
+            # Add an empty array that will hold each cell
+            # in this row
             self.grid.append([])
             for column in range(COLUMN_COUNT):
-                self.grid[row].append(0)
+                self.grid[row].append(0)  # Append a cell
+
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
+        """
+        Render the screen.
+        """
+
+        # This command has to happen before we start drawing
         self.clear()
+
+        # Draw the grid
         for row in range(ROW_COUNT):
             for column in range(COLUMN_COUNT):
-                if self.grid[row][column] == 2:
-                    color = arcade.color.LIGHT_GRAY
+                # Figure out what color to draw the box
+                if self.grid[row][column] == 1:
+                    color = arcade.color.GREEN
                 else:
                     color = arcade.color.WHITE
 
@@ -79,175 +66,33 @@ class Game_2048(arcade.Window):
                 # Draw the box
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
 
-    
-    def spawn_tile(self):
-        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
-        if empty_cells:
-            i, j = random.choice(empty_cells)
-            self.board[i][j] = 2 if random.random() < 0.9 else 4
-            
-    def move_right(board):
-        reversed_board = [row[::-1] for row in board]
-        new_board = []
-        for row in reversed_board:
-            new_row = merge_tiles(row)
-            new_board.append(new_row[::-1])
-        return new_board
+    def on_mouse_press(self, x, y, button, modifiers):
+        """
+        Called when the user presses a mouse button.
+        """
 
-    def move_up(board):
-        transposed_board = transpose_board(board)
-        new_board = move_left(transposed_board)
-        return transpose_board(new_board)
+        # Change the x/y screen coordinates to grid coordinates
+        column = int(x // (WIDTH + MARGIN))
+        row = int(y // (HEIGHT + MARGIN))
 
-    def move_down(board):
-        transposed_board = transpose_board(board)
-        new_board = move_right(transposed_board)
-        return transpose_board(new_board)
-    
-    def merge_tiles(self, direction):
-        new_row = [0] * 4
-        index = 0
-        for tile in row:
-            if tile != 0:
-                if new_row[index] == 0:
-                    new_row[index] = tile
-                elif new_row[index] == tile:
-                    new_row[index] *= 2
-                    index += 1
-                else:
-                    index += 1
-                    new_row[index] = tile
+        print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
 
-        return new_row
-    
+        # Make sure we are on-grid. It is possible to click in the upper right
+        # corner in the margin and go to a grid location that doesn't exist
+        if row < ROW_COUNT and column < COLUMN_COUNT:
 
-    def main():
-        game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT, "2048")
-        arcade.run()
-    
-    if __name__ == "__main__":
-        main()
+            # Flip the location between 1 and 0.
+            if self.grid[row][column] == 0:
+                self.grid[row][column] = 1
+            else:
+                self.grid[row][column] = 0
 
-
-    def new_board():
-        board = [[0 for _x in range(COLUMN_COUNT)] for _y in range(ROW_COUNT)]
-        board += [[1 for _x in range(COLUMN_COUNT)]]
-        board = np.asarray(board)
-        return board
-
-
-class Game_2048(arcade.Window):
-    
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title)
-
-        self.board = None
-        self.frame_count = 0
-        self.game_over = False
-        self.paused = False
-        self.board_sprite_list = None
-        
-        self.grid = []
-        for row in range(ROW_COUNT):
-            self.grid.append([])
-            for column in range(COLUMN_COUNT):
-                self.grid[row].append(0)
-        arcade.set_background_color(arcade.color.BLACK)
-
-    def on_draw(self):
-        self.clear()
-        for row in range(ROW_COUNT):
-            for column in range(COLUMN_COUNT):
-                # Figure out what color to draw the box
-                if self.grid[row][column] == 2:
-                    color = light_gray
-                if self.grid[row][column] == 4:
-                    color = darker_gray
-                if self.grid[row][column] == 8:
-                    color = light_orange
-                if self.grid[row][column] == 16:
-                    color = darker_orange 
-                if self.grid[row][column] == 32:
-                    color = red
-                if self.grid[row][column] == 64:
-                    color = darker_red
-                if self.grid[row][column] == 128:
-                    color = yellow
-                if self.grid[row][column] == 256:
-                    color = arcade.color.Orange
-                if self.grid[row][column] == 512:
-                    color = arcade.color.Orange
-                if self.grid[row][column] == 2024:
-                    color = arcade.color.Orange
-                if self.grid[row][column] == 2048:
-                    color = arcade.color.Orange
-
-                # Do the math to figure out where the box is
-                x = (MARGIN + WIDTH) * column + MARGIN + WIDTH // 2
-                y = (MARGIN + HEIGHT) * row + MARGIN + HEIGHT // 2
-
-                # Draw the box
-                arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
-
-    
-    def spawn_tile(self):
-        empty_cells = [(i, j) for i in range(4) for j in range(4) if board[i][j] == 0]
-        if empty_cells:
-            i, j = random.choice(empty_cells)
-            self.board[i][j] = 2 if random.random() < 0.9 else 4
-            
-    def move_right(self):
-        self.board = np.rot90(self.board, k=2)
-        self.move_left()
-        self.board = np.rot90(self.board, k=2)
-
-    def move_up(self):
-        self.board = np.rot90(self.board, k=1)
-        self.move_left()
-        self.board = np.rot90(self.board, k=3)
-
-    def move_down(self):
-        self.board = np.rot90(self.board, k=3)
-        self.move_left()
-        self.board = np.rot90(self.board, k=1)
-
-    def move_left(self):
-        for row in range(ROW_COUNT):
-            new_row = self.merge_tiles(self.board[row])
-            self.board[row] = new_row
-
-    def on_key_press(self, symbol, modifiers):
-        if symbol == arcade.key.RIGHT:
-            self.move_right()
-        elif symbol == arcade.key.UP:
-            self.move_up()
-        elif symbol == arcade.key.LEFT:
-            self.move_left()
-        elif symbol == arcade.key.DOWN:
-            self.move_down()
-        elif symbol == arcade.key.SPACE:
-            self.spawn_tile()
-
-    def merge_tiles(self, direction):
-        new_row = [0] * 4
-        index = 0
-        for tile in row:
-            if tile != 0:
-                if new_row[index] == 0:
-                    new_row[index] = tile
-                elif new_row[index] == tile:
-                    new_row[index] *= 2
-                    index += 1
-                else:
-                    index += 1
-                    new_row[index] = tile
-
-        return new_row
-    
 
 def main():
-    game = Game_2048(SCREEN_WIDTH, SCREEN_HEIGHT, "2048")
+
+    MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     arcade.run()
-    
+
+
 if __name__ == "__main__":
     main()
