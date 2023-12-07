@@ -85,7 +85,16 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
-        if key == arcade.key.UP:
+         if key == arcade.key.UP:
+            self.generate_tiles()
+
+        if key == arcade.key.DOWN:
+            self.generate_tiles()
+        
+        if key == arcade.key.LEFT:
+            self.generate_tiles()
+            
+        if key == arcade.key.RIGHT:
             self.generate_tiles()
 
        
