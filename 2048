@@ -71,7 +71,7 @@ class MyGame(arcade.Window):
                 # Draw the box
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
 
-    def generate_tiles:
+    def generate_tiles(self):
         empty_cells = [(r, c) for r in range(ROW_COUNT) for c in range(COLUMN_COUNT) if self.grid[r][c] == 0]
         random.shuffle(empty_cells)
     
@@ -81,29 +81,17 @@ class MyGame(arcade.Window):
             if not empty_cells:
                 break
             row, col = empty_cells.pop()
-        self.grid[row][col] = random.choices([2, 4], weights=[0.9, 0.1])[0]
+        self.grid[row][col] = 1
 
-    def on_key_press(self, x, y, button, modifiers):
-        """
-        Called when the user presses a mouse button.
-        """
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed."""
+        if key == arcade.key.UP:
+            self.generate_tiles()
 
-        # Change the x/y screen coordinates to grid coordinates
-        column = int(x // (WIDTH + MARGIN))
-        row = int(y // (HEIGHT + MARGIN))
+       
 
-        print(f"Click coordinates: ({x}, {y}). Grid coordinates: ({row}, {column})")
 
-        # Make sure we are on-grid. It is possible to click in the upper right
-        # corner in the margin and go to a grid location that doesn't exist
-        if row < ROW_COUNT and column < COLUMN_COUNT:
-
-            # Flip the location between 1 and 0.
-            if self.grid[row][column] == 0:
-                self.grid[row][column] = 1
-            else:
-                self.grid[row][column] = 0
-
+    
 
 def main():
 
