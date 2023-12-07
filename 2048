@@ -75,7 +75,7 @@ class MyGame(arcade.Window):
         empty_cells = [(r, c) for r in range(ROW_COUNT) for c in range(COLUMN_COUNT) if self.grid[r][c] == 0]
         random.shuffle(empty_cells)
     
-        num_tiles = min(len(empty_cells), random.randint(1, 2))  # Ensure we don't exceed available empty cells
+        num_tiles = min(len(empty_cells), random.randint(1, 2)) 
     
         for _ in range(num_tiles):
             if not empty_cells:
