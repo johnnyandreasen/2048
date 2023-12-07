@@ -70,6 +70,16 @@ class MyGame(arcade.Window):
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
 
     def generate_tiles:
+        empty_cells = [(r, c) for r in range(ROW_COUNT) for c in range(COLUMN_COUNT) if self.grid[r][c] == 0]
+        random.shuffle(empty_cells)
+    
+        num_tiles = min(len(empty_cells), random.randint(1, 2))  # Ensure we don't exceed available empty cells
+    
+        for _ in range(num_tiles):
+            if not empty_cells:
+                break
+            row, col = empty_cells.pop()
+        self.grid[row][col] = random.choices([2, 4], weights=[0.9, 0.1])[0]
 
     def on_key_press(self, x, y, button, modifiers):
         """
