@@ -45,6 +45,8 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.color.BLACK)
 
+        self.generate_tiles()
+
     def on_draw(self):
         """
         Render the screen.
