@@ -15,6 +15,16 @@ SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
+def create_textures():
+    """ Create a list of images for sprites based on the global colors. """
+    new_textures = []
+    for color in colors:
+        image = PIL.Image.new('RGBA', (WIDTH, HEIGHT), color)
+        new_textures.append(arcade.Texture(str(color), image=image))
+    return new_textures
+
+texture_list = create_textures()
+
 class MyGame(arcade.Window):
    
     def __init__(self, width, height, title):
