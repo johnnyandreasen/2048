@@ -15,6 +15,17 @@ SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
+colors = [
+    (0,   0,   0, 255),
+    (255, 0,   0, 255),
+    (0,   150, 0, 255),
+    (0,   0,   255, 255),
+    (255, 120, 0, 255),
+    (255, 255, 0, 255),
+    (180, 0,   255, 255),
+    (0,   220, 220, 255)
+]
+
 def create_textures():
     """ Create a list of images for sprites based on the global colors. """
     new_textures = []
