@@ -16,18 +16,13 @@ SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
 colors = [
-    (0,   0,   0, 255),
-    (255, 0,   0, 255),
-    (0,   150, 0, 255),
-    (0,   0,   255, 255),
-    (255, 120, 0, 255),
-    (255, 255, 0, 255),
-    (180, 0,   255, 255),
-    (0,   220, 220, 255)
+    (119, 136, 153, 255),
+    (128, 128, 128, 255),
+    (85, 85, 85, 255),
 ]
 
+
 def create_textures():
-    """ Create a list of images for sprites based on the global colors. """
     new_textures = []
     for color in colors:
         image = PIL.Image.new('RGBA', (WIDTH, HEIGHT), color)
@@ -84,6 +79,18 @@ class MyGame(arcade.Window):
                 break
             row, col = empty_cells.pop()
         self.grid[row][col] = 1
+        
+        
+    def collision_row(self):
+        x = 0
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row] == 1:
+                    x = x+1
+                    return x
+            
+                if x == 2:
+                    self.grid[row][column] = 2
         
 
     def on_key_press(self, key, modifiers):
