@@ -85,16 +85,33 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
+
          if key == arcade.key.UP:
+            for row in range(ROW_COUNT):
+                for column in range(COLUMN_COUNT):
+                    if self.grid[row][column] == 1:
+                        self.grid[row][column] = 0
             self.generate_tiles()
 
         if key == arcade.key.DOWN:
+            for row in range(ROW_COUNT):
+                for column in range(COLUMN_COUNT):
+                    if self.grid[row][column] == 1:
+                        self.grid[row][column] = 0
             self.generate_tiles()
         
         if key == arcade.key.LEFT:
+            for row in range(ROW_COUNT):
+                for column in range(COLUMN_COUNT):
+                    if self.grid[row][column] == 1:
+                        self.grid[row][column] = 0
             self.generate_tiles()
             
         if key == arcade.key.RIGHT:
+            for row in range(ROW_COUNT):
+                for column in range(COLUMN_COUNT):
+                    if self.grid[row][column] == 1:
+                        self.grid[row][column] = 0
             self.generate_tiles()
 
        
