@@ -16,7 +16,11 @@ SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
 class MyGame(arcade.Window):
-    
+
+    darker_orange = (242, 139, 18, 0.8)
+    red = (230, 26, 26, 0.8)
+    darker_red = (230, 26, 26, 1)
+    yellow = (255, 255, 25, 1)
    
     def __init__(self, width, height, title):
        
@@ -40,6 +44,27 @@ class MyGame(arcade.Window):
 
         for row in range(ROW_COUNT):
             for column in range(COLUMN_COUNT):
+                # Figure out what color to draw the box
+                if self.grid[row][column] == 4:
+                    color = light_orange
+                if self.grid[row][column] ==8:
+                    color = darker orange 
+                if self.grid[row][column] == 16:
+                    color = red
+                if self.grid[row][column] == 32:
+                    color = darker_red
+                if self.grid[row][column] == 64:
+                    color = yellow
+                if self.grid[row][column] == 128:
+                    color = arcade.color.Orange
+                if self.grid[row][column] == 256:
+                    color = arcade.color.Purple
+                if self.grid[row][column] == 512:
+                    color = arcade.color.Blue
+                if self.grid[row][column] == 1024
+                    color = arcade.color.Green
+                if self.grid[row][column] == 2048:
+                    color = arcade.color.Black
                 
                 if self.grid[row][column] == 1:
                     color = arcade.color.LIGHT_GRAY
