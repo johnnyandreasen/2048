@@ -16,6 +16,7 @@ SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 SCREEN_TITLE = "2048"
 
 class MyGame(arcade.Window):
+    
    
     def __init__(self, width, height, title):
        
@@ -31,6 +32,7 @@ class MyGame(arcade.Window):
         arcade.set_background_color(arcade.color.BLACK)
 
         self.generate_tiles()
+        
 
     def on_draw(self):
         
@@ -50,6 +52,7 @@ class MyGame(arcade.Window):
                 y = (MARGIN + HEIGHT) * row + MARGIN + HEIGHT // 2
 
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
+                
 
     def generate_tiles(self):
         empty_cells = [(r, c) for r in range(ROW_COUNT) for c in range(COLUMN_COUNT) if self.grid[r][c] == 0]
@@ -124,6 +127,7 @@ class MyGame(arcade.Window):
                         self.grid[row][3] = 1
                         
             self.generate_tiles()
+            
 
 def main():
 
