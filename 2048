@@ -48,7 +48,7 @@ class MyGame(arcade.Window):
                 if self.grid[row][column] == 4:
                     color = light_orange
                 if self.grid[row][column] ==8:
-                    color = darker orange 
+                    color = darker_orange 
                 if self.grid[row][column] == 16:
                     color = red
                 if self.grid[row][column] == 32:
@@ -61,7 +61,7 @@ class MyGame(arcade.Window):
                     color = arcade.color.Purple
                 if self.grid[row][column] == 512:
                     color = arcade.color.Blue
-                if self.grid[row][column] == 1024
+                if self.grid[row][column] == 1024:
                     color = arcade.color.Green
                 if self.grid[row][column] == 2048:
                     color = arcade.color.Black
